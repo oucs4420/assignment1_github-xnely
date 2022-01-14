@@ -10,9 +10,21 @@ using namespace std;
 
 int main( int argc, char* argv[] )
 {
-    // just to get you started, this is how to refer to the arguments that were passed
-    for (int arg = 0; arg < argc; ++arg)
-            std::cout << "argv[" << arg << "]: " << argv[arg] << '\n' ;
+    std::cout<<"program: "<<argv[0]<<'\n';
+    std::ifstream file;
+    int count;
+    std::string trash; // take side affect of std::getline
+    for (int arg = 1; arg < argc; ++arg){
+        std::cout<<' '<<argv[arg]<<": ";
+        file.open(argv[arg]);
+        if(file.fail()) std::cout<<"-1\n";
+        else{
+            count = 0;
+            while(std::getline(file, trash)) ++count; // use getline to count # of '\n'
+            std::cout<<count<<'\n';
+        }
+        file.close();
+    }
 
     exit(0); // this means that the program executed correctly!
 }
